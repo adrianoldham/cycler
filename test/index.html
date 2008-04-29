@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+	<title>Cycler Demo</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" charset="utf-8" src="../lib/prototype.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../lib/scriptaculous.js?load=effects"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/cycler.js"></script>	
+	<style type="text/css">
+		body
+		{
+			font-family: Arial;
+			font-size: 12px;
+		}
+	
+		.home
+		{
+			background-color: #eee;
+			border: 2px solid #ccc;
+			padding: 10px;
+		}
+		
+		.article
+		{
+			background-color: #eee;
+			position: relative;
+			min-height: 150px;
+		}
+
+		.article h1
+		{
+			color: gray;
+			font-size: 1.3em;
+			margin: 0;
+			margin-bottom: 10px;
+		}
+		
+		.article p
+		{
+			margin-bottom: 0px;
+		}
+		
+		.nb
+		{
+			color: gray;
+			font-size: 0.9em;
+		}
+	</style>
+</head>
+<body>
+	<div class="home">
+		<div id="paused">
+			Paused
+		</div>
+		<div class="article">
+			<h1>Cycle Element 1</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque nec dolor. Aliquam tincidunt accumsan velit. Mauris rhoncus suscipit arcu. Mauris ac velit. Sed dapibus pretium eros. Ut at erat eget massa pretium luctus. Nam vitae ante. Donec nisl magna, congue ac, congue sed, pharetra eget, eros. Nullam a dolor. Nunc nulla orci, vestibulum vel, dapibus nec, euismod sit amet, ante. Morbi adipiscing egestas nisi. Integer sit amet felis eu ligula malesuada dictum. Mauris volutpat est ac mi. Vivamus sem erat, sagittis at, gravida aliquet, viverra eu, libero.
+			</p>
+		</div>
+		
+		<div class="article">
+			<h1>Cycle Element 2</h1>
+			<p>
+				Praesent quis lacus at dui pulvinar condimentum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus sollicitudin porttitor dolor. Duis id libero vitae odio vulputate laoreet. Proin eget lacus aliquet quam rutrum varius. Maecenas urna nisl, dignissim vel, rhoncus commodo, molestie vel, nulla. Mauris cursus condimentum est. Integer commodo sodales nisi. Sed nisi eros, dignissim non, venenatis et, consequat at, nisl. Phasellus sodales, nisl consequat pellentesque dignissim, metus purus vestibulum nibh, a lobortis neque lectus vel nisi.
+			</p>
+		</div>
+		
+		<div class="article">
+			<h1>Cycle Element 3</h1>
+			<p>
+				Maecenas iaculis placerat elit. Integer quis lectus ac diam posuere rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi elit odio, suscipit eget, facilisis eu, porttitor et, odio. Maecenas ultrices interdum ipsum. Curabitur semper leo a augue euismod pellentesque. In placerat orci tristique tellus. Curabitur justo. Pellentesque et metus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec orci justo, convallis a, scelerisque a, euismod quis, lorem. Quisque ac quam. Nullam venenatis felis vel massa. Integer tellus risus, mattis ut, luctus a, suscipit et, tortor.
+			</p>	
+		</div>
+		
+		<div class="article">
+			<h1>Cycle Element 4</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque nec dolor. Aliquam tincidunt accumsan velit. Mauris rhoncus suscipit arcu. Mauris ac velit. Sed dapibus pretium eros. Ut at erat eget massa pretium luctus. Nam vitae ante. Donec nisl magna, congue ac, congue sed, pharetra eget, eros. Nullam a dolor. Nunc nulla orci, vestibulum vel, dapibus nec, euismod sit amet, ante. Morbi adipiscing egestas nisi. Integer sit amet felis eu ligula malesuada dictum. Mauris volutpat est ac mi. Vivamus sem erat, sagittis at, gravida aliquet, viverra eu, libero.
+			</p>
+		</div>
+		
+		<div class="article">
+			<h1>Cycle Element 5</h1>
+			<p>
+				Praesent quis lacus at dui pulvinar condimentum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus sollicitudin porttitor dolor. Duis id libero vitae odio vulputate laoreet. Proin eget lacus aliquet quam rutrum varius. Maecenas urna nisl, dignissim vel, rhoncus commodo, molestie vel, nulla. Mauris cursus condimentum est. Integer commodo sodales nisi. Sed nisi eros, dignissim non, venenatis et, consequat at, nisl. Phasellus sodales, nisl consequat pellentesque dignissim, metus purus vestibulum nibh, a lobortis neque lectus vel nisi.
+			</p>
+		</div>
+		
+		<div class="article">
+			<h1>Cycle Element 6</h1>
+			<p>
+				Maecenas iaculis placerat elit. Integer quis lectus ac diam posuere rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi elit odio, suscipit eget, facilisis eu, porttitor et, odio. Maecenas ultrices interdum ipsum. Curabitur semper leo a augue euismod pellentesque. In placerat orci tristique tellus. Curabitur justo. Pellentesque et metus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec orci justo, convallis a, scelerisque a, euismod quis, lorem. Quisque ac quam. Nullam venenatis felis vel massa. Integer tellus risus, mattis ut, luctus a, suscipit et, tortor.
+			</p>	
+		</div>
+	</div>
+	<p class="nb">Note: Mouse over to stop</p>
+	<script type="text/javascript">
+        /* 
+        JS file where initialising code of js cycle resides.
+        This code will need to be merged with the bse.js you already have.
+  
+        Make sure to change the selector used with the cycler to match your requirements.
+        "div#container div.article" is the selector used for this demo.
+        */
+	    var cycler = new Cycler("div.home div.article", 5, "paused");
+	    cycler.startCycle();	
+	</script>
+</body>
+</html>
