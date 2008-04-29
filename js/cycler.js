@@ -63,8 +63,7 @@ Cycler.prototype = {
 	else {
 	  // if no cycle status div, then we create one with class "cycle_play"
 	  this.cycleStatus = new Element("div");
-
-	  this.cycleStatus.addClassName("cycle_play");
+	  this.cycleStatus.addClassName("cycle_status");
 	  wrapper.insertBefore(this.cycleStatus, this.currentChild);
 	}
 
@@ -83,8 +82,8 @@ Cycler.prototype = {
 	startCycle: function() {
 	  // switch off is cycling
 	  //this.cycleStatus.hide();
-	  this.cycleStatus.addClassName("cycle_play");
-	  this.cycleStatus.removeClassName("cycle_pause");
+	  this.cycleStatus.addClassName("play");
+	  this.cycleStatus.removeClassName("pause");
 	  this.cycleStatus.innerHTML = "Playing";
 	  
 	  if (this.scroller != null) this.scroller.stop();
@@ -94,7 +93,8 @@ Cycler.prototype = {
 	stopCycle: function() {
 	  // switch on if paused
 	  //this.cycleStatus.show();
-	  this.cycleStatus.addClassName("cycle_pause");
+	  this.cycleStatus.addClassName("pause");
+	  this.cycleStatus.removeClassName("play");
 	  this.cycleStatus.innerHTML = "Paused";
 
 	  if (this.scroller != null) this.scroller.stop();
