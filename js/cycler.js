@@ -1,10 +1,25 @@
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 var DEFAULT_DELAY = 5;
 
 var Cycler = Class.create();
 Cycler.prototype = {
 	initialize: function(articlesSelector, delay, statusDivID) {
 	  // grab all the artcle elements using the selector provided
-	  this.articleElements = $$(articlesSelector);
+	  var originalArticleElements = $$(articlesSelector);
+	
+		// randomize cycle
+		this.articleElements = new Array();
+		while (originalArticleElements.length > 0) {
+			var rand = Math.floor(Math.random() * originalArticleElements.length);
+			var articleElement = originalArticleElements[rand];
+			originalArticleElements.remove(rand);
+			this.articleElements.push(articleElement);
+		}
 	  
 	  if (this.articleElements.length < 2) return;
 	  
@@ -15,8 +30,7 @@ Cycler.prototype = {
 	  // parent of the article elements is the container/cycle region
 	  this.cycleRegion  = this.currentChild.parentNode;
 	  
-	  var wrapper = document.createElement("div");
-	  Element.extend(wrapper);
+	  var wrapper = new Element("div");
 	  wrapper.style.position = "relative";
 	  wrapper.addClassName("cycle_wrapper");
 	  
@@ -27,10 +41,9 @@ Cycler.prototype = {
 	  // only show first article at start up
 	  first = true;
 	  this.articleElements.each(function(e) {
-	    e.parentNode.removeChild(e);
-	    var wrappedArticle = document.createElement("div");
-	    Element.extend(wrappedArticle);
-      wrappedArticle.addClassName("cycle_element");
+	    Element.remove(e);
+	    var wrappedArticle = new Element("div");
+	    wrappedArticle.addClassName("cycle_element");
 	    
 	    wrappedArticle.appendChild(e);
 	    wrapper.appendChild(wrappedArticle);	    
@@ -49,8 +62,7 @@ Cycler.prototype = {
     }
     else {
       // if no cycle status div, then we create one with class "cycle_play"
-      this.cycleStatus = document.createElement("div");
-      Element.extend(this.cycleStatus);
+      this.cycleStatus = new Element("div");
 
       this.cycleStatus.addClassName("cycle_play");
       wrapper.insertBefore(this.cycleStatus, this.currentChild);
@@ -59,27 +71,26 @@ Cycler.prototype = {
     //this.cycleStatus.hide();
 	  
     // on mouse over, stop cycling
-		Event.observe(wrapper, "mouseover", this.stopCycle.bindAsEventListener(this));
+		Event.observe(wrapper, "mouseover", this.stopCycle.bind(this));
 		
 		// on mouse out, start cycling again
-		Event.observe(wrapper, "mouseout", this.startCycle.bindAsEventListener(this));
+		Event.observe(wrapper, "mouseout", this.startCycle.bind(this));
 		
 	  this.cycleRegion = wrapper;
 	  this.articleElements = wrappedElements;
 	},
 	
-	startCycle: function(event) {
+	startCycle: function() {
 	  // switch off is cycling
 	  //this.cycleStatus.hide();
       this.cycleStatus.addClassName("cycle_play");
       this.cycleStatus.removeClassName("cycle_pause");
-
 	  
 	  if (this.scroller != null) this.scroller.stop();
 	  this.scroller = new PeriodicalExecuter(this.switchIt.bind(this), this.delay);
 	},
 	
-	stopCycle: function(event) {
+	stopCycle: function() {
 	  // switch on if paused
 	  //this.cycleStatus.show();
       this.cycleStatus.addClassName("cycle_pause");
