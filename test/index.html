@@ -20,6 +20,7 @@
 			background-color: #eee;
 			border: 2px solid #ccc;
 			padding: 10px;
+			position: relative;
 		}
 		
 		.article
@@ -47,12 +48,20 @@
 			color: gray;
 			font-size: 0.9em;
 		}
+		#cyclerStatus
+		{
+		    position: absolute;
+		    bottom: 0;
+		    right: 0;
+		    z-index: 10;
+		    padding: 5px;
+		}
 	</style>
 </head>
 <body>
 	<div class="home">
-		<div id="paused">
-			Paused
+		<div id="cyclerStatus">
+			Playing
 		</div>
 		<div class="article">
 			<h1>Cycle Element 1</h1>
@@ -96,7 +105,7 @@
 			</p>	
 		</div>
 	</div>
-	<p class="nb">Note: Mouse over to stop</p>
+	<p class="nb">Note: Mouse over cycle element to pause</p>
 	<script type="text/javascript">
         /* 
         JS file where initialising code of js cycle resides.
@@ -105,7 +114,7 @@
         Make sure to change the selector used with the cycler to match your requirements.
         "div#container div.article" is the selector used for this demo.
         */
-	    var cycler = new Cycler("div.home div.article", 5, "paused");
+	    var cycler = new Cycler("div.home div.article", 5, "cyclerStatus");
 	    cycler.startCycle();	
 	</script>
 </body>
