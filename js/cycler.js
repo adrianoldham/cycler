@@ -5,8 +5,6 @@ Cycler.prototype = {
 	initialize: function(articlesSelector, delay, statusDivID) {
 	  // grab all the artcle elements using the selector provided
 	  this.articleElements = $$(articlesSelector);
-	
-		
 	  
 	  if (this.articleElements.length < 2) return;
 	  
@@ -58,7 +56,7 @@ Cycler.prototype = {
       wrapper.insertBefore(this.cycleStatus, this.currentChild);
     }
     
-    this.cycleStatus.hide();
+    //this.cycleStatus.hide();
 	  
     // on mouse over, stop cycling
 		Event.observe(wrapper, "mouseover", this.stopCycle.bindAsEventListener(this));
@@ -72,7 +70,10 @@ Cycler.prototype = {
 	
 	startCycle: function(event) {
 	  // switch off is cycling
-	  this.cycleStatus.hide();
+	  //this.cycleStatus.hide();
+      this.cycleStatus.addClassName("cycle_play");
+      this.cycleStatus.removeClassName("cycle_pause");
+
 	  
 	  if (this.scroller != null) this.scroller.stop();
 	  this.scroller = new PeriodicalExecuter(this.switchIt.bind(this), this.delay);
@@ -80,7 +81,8 @@ Cycler.prototype = {
 	
 	stopCycle: function(event) {
 	  // switch on if paused
-	  this.cycleStatus.show();
+	  //this.cycleStatus.show();
+      this.cycleStatus.addClassName("cycle_pause");
 	  
 	  if (this.scroller != null) this.scroller.stop();
 	},
