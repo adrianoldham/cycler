@@ -114,7 +114,7 @@
         Make sure to change the selector used with the cycler to match your requirements.
         "div#container div.article" is the selector used for this demo.
         */
-	    var cycler = new Cycler("div.home div.article", 5, "cyclerStatus");
+	    var cycler = new Cycler("div.home div.article", { delay: 5, statusElement: "cyclerStatus", random: true });
 	    cycler.startCycle();	
 	</script>
 </body>

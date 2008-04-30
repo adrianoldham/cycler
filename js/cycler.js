@@ -8,24 +8,29 @@ var DEFAULT_DELAY = 5;
 
 var Cycler = Class.create();
 Cycler.prototype = {
-	initialize: function(articlesSelector, delay, statusDivID) {
+	initialize: function(articlesSelector, options) {
+		this.options = Object.extend({ delay: DEFAULT_DELAY, random: false }, options || {});
+		
 	  // grab all the artcle elements using the selector provided
 	  var originalArticleElements = $$(articlesSelector);
 	
 		// randomize cycle
 		this.articleElements = new Array();
 		while (originalArticleElements.length > 0) {
-			var rand = Math.floor(Math.random() * originalArticleElements.length);
-			var articleElement = originalArticleElements[rand];
+			var rand = 0;
+			if (this.options.random)
+				rand = Math.floor(Math.random() * originalArticleElements.length);			
+			
+			var articleElement = originalArticleElements[rand];			
 			originalArticleElements.remove(rand);
 			this.articleElements.push(articleElement);
 		}
 
 	  if (this.articleElements.length < 2) return;
-
+		
 	  this.scroller     = null;
 	  this.currentChild = this.articleElements[0];
-	  this.delay        = delay || DEFAULT_DELAY;
+	  this.delay        = this.options.delay;
 
 	  // parent of the article elements is the container/cycle region
 	  this.cycleRegion  = this.currentChild.parentNode;
@@ -56,16 +61,16 @@ Cycler.prototype = {
 	  this.currentIndex = 0;
 	  this.currentChild = wrappedElements[0];
 
-	if (statusDivID != null) {
-	  // cycle status div is specified
-	  this.cycleStatus = $(statusDivID);
-	}
-	else {
-	  // if no cycle status div, then we create one with class "cycle_play"
-	  this.cycleStatus = new Element("div");
-	  this.cycleStatus.addClassName("cycle_status");
-	  wrapper.insertBefore(this.cycleStatus, this.currentChild);
-	}
+		if (this.options.statusElement != null) {
+		  // cycle status div is specified
+		  this.cycleStatus = $(this.options.statusElement);
+		}
+		else {
+		  // if no cycle status div, then we create one with class "cycle_play"
+		  this.cycleStatus = new Element("div");
+		  this.cycleStatus.addClassName("cycle_status");
+		  wrapper.insertBefore(this.cycleStatus, this.currentChild);
+		}
 
 	  //this.cycleStatus.hide();
 
