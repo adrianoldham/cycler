@@ -16,7 +16,7 @@ Cycler.prototype = {
             options || {}
         );
 
-        // grab all the artcle elements using the selector provided
+        // grab all the article elements using the selector provided
         var originalArticleElements = $$(articlesSelector);
 
         // randomize cycle
@@ -38,7 +38,7 @@ Cycler.prototype = {
         this.delay = this.options.delay;
 
         // parent of the article elements is the container/cycle region
-        this.cycleRegion    = this.currentChild.parentNode;
+        this.cycleRegion = this.currentChild.parentNode;
 
         var wrapper = new Element("div");
         wrapper.style.position = "relative";
@@ -71,7 +71,7 @@ Cycler.prototype = {
             this.cycleStatus = $(this.options.statusElement);
         }
         else if (typeof(this.options.statusElement) == "boolean" && this.options.statusElement == true) {
-            // if no cycle status div, then we create one with class "cycle_play"
+            // if no cycle status div, then we create one with class "cycle_status"
             this.cycleStatus = new Element("div");
             this.cycleStatus.addClassName("cycle_status");
             wrapper.insertBefore(this.cycleStatus, this.currentChild);
@@ -90,19 +90,19 @@ Cycler.prototype = {
     },
 
     startCycle: function(event) {
-				if (event == null) {
-					this.started = true;
-				} else if (!this.started) {
-					return;
-				}
-			
+        if (event == null) {
+            this.started = true;
+        } else if (!this.started) {
+            return;
+        }
+
         // switch off is cycling
         //this.cycleStatus.hide();
-				if (this.cycleStatus) {
-        	this.cycleStatus.addClassName("play");
-        	this.cycleStatus.removeClassName("pause");
-        	this.cycleStatus.innerHTML = "Playing";
-				}
+        if (this.cycleStatus) {
+            this.cycleStatus.addClassName("play");
+            this.cycleStatus.removeClassName("pause");
+            this.cycleStatus.innerHTML = "Playing";
+        }
         
         if (this.scroller != null) this.scroller.stop();
         this.scroller = new PeriodicalExecuter(this.switchIt.bind(this), this.delay);
@@ -111,11 +111,11 @@ Cycler.prototype = {
     stopCycle: function() {
         // switch on if paused
         //this.cycleStatus.show();
-				if (this.cycleStatus) {
-        	this.cycleStatus.addClassName("pause");
-        	this.cycleStatus.removeClassName("play");
-        	this.cycleStatus.innerHTML = "Paused";
-				}
+        if (this.cycleStatus) {
+            this.cycleStatus.addClassName("pause");
+            this.cycleStatus.removeClassName("play");
+            this.cycleStatus.innerHTML = "Paused";
+        }
 
         if (this.scroller != null) this.scroller.stop();
     },
@@ -141,7 +141,6 @@ Cycler.prototype = {
         this.currentChild.style.top = "0";
         this.currentChild.style.left = "0";
         this.currentChild.style.width = "100%";
-
         this.currentChild.style.zIndex = 100;
 
         this.currentChild.visualEffect('appear', { beforeFinish: this.revertArticle.bind(this) });
