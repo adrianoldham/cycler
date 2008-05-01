@@ -66,11 +66,11 @@ Cycler.prototype = {
         this.currentIndex = 0;
         this.currentChild = wrappedElements[0];
 
-        if (this.options.statusElement != null) {
+        if (typeof(this.options.statusElement) == "string") {
             // cycle status div is specified
             this.cycleStatus = $(this.options.statusElement);
         }
-        else {
+        else if (typeof(this.options.statusElement) == "boolean" && this.options.statusElement == true) {
             // if no cycle status div, then we create one with class "cycle_play"
             this.cycleStatus = new Element("div");
             this.cycleStatus.addClassName("cycle_status");
@@ -89,12 +89,20 @@ Cycler.prototype = {
         this.articleElements = wrappedElements;
     },
 
-    startCycle: function() {
+    startCycle: function(event) {
+				if (event == null) {
+					this.started = true;
+				} else if (!this.started) {
+					return;
+				}
+			
         // switch off is cycling
         //this.cycleStatus.hide();
-        this.cycleStatus.addClassName("play");
-        this.cycleStatus.removeClassName("pause");
-        this.cycleStatus.innerHTML = "Playing";
+				if (this.cycleStatus) {
+        	this.cycleStatus.addClassName("play");
+        	this.cycleStatus.removeClassName("pause");
+        	this.cycleStatus.innerHTML = "Playing";
+				}
         
         if (this.scroller != null) this.scroller.stop();
         this.scroller = new PeriodicalExecuter(this.switchIt.bind(this), this.delay);
@@ -103,9 +111,11 @@ Cycler.prototype = {
     stopCycle: function() {
         // switch on if paused
         //this.cycleStatus.show();
-        this.cycleStatus.addClassName("pause");
-        this.cycleStatus.removeClassName("play");
-        this.cycleStatus.innerHTML = "Paused";
+				if (this.cycleStatus) {
+        	this.cycleStatus.addClassName("pause");
+        	this.cycleStatus.removeClassName("play");
+        	this.cycleStatus.innerHTML = "Paused";
+				}
 
         if (this.scroller != null) this.scroller.stop();
     },
