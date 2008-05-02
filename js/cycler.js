@@ -32,7 +32,7 @@ Cycler.prototype = {
         }
 
         if (this.articleElements.length < 2) return;
-        
+
         this.scroller = null;
         this.currentChild = this.articleElements[0];
         this.delay = this.options.delay;
