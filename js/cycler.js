@@ -150,4 +150,4 @@ Cycler.prototype = {
         this.currentChild.style.position = "";
         this.oldChild.hide();
     }
-}
+};
