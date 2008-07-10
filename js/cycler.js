@@ -18,6 +18,9 @@ Cycler.prototype = {
 
         // grab all the article elements using the selector provided
         var originalArticleElements = $$(articlesSelector);
+        
+        // if no elements found matching the selector then die
+        if (originalArticleElements.length == 0) return;
 
         // randomize cycle
         this.articleElements = new Array();
@@ -90,6 +93,8 @@ Cycler.prototype = {
     },
 
     startCycle: function(event) {
+        // if no article elements then die
+        if (this.articleElements == null) return;
         if (event == null) {
             this.started = true;
         } else if (!this.started) {
