@@ -36,7 +36,7 @@ Cycler.prototype = {
         // parent of the article elements is the container/cycle region
         this.cycleRegion = this.currentChild.parentNode;
 
-        var wrapper = new Element("div", { style: "relative", "class": this.options.wrapperClass });
+        var wrapper = new Element("div", { "class": this.options.wrapperClass }).setStyle({ position: "relative" });
 
         this.cycleRegion.insertBefore(wrapper, this.currentChild);
 
@@ -96,7 +96,7 @@ Cycler.prototype = {
         if (this.cycleStatus) {
             this.cycleStatus.addClassName(this.options.statusPlayingClass);
             this.cycleStatus.removeClassName(this.options.statusPausedClass);
-            this.cycleStatus.innerHTML = this.options.statusPlayingText;
+            this.cycleStatus.update(this.options.statusPlayingText);
         }
 
         if (this.scroller != null) this.scroller.stop();
@@ -109,7 +109,7 @@ Cycler.prototype = {
         if (this.cycleStatus) {
             this.cycleStatus.addClassName(this.options.statusPausedClass);
             this.cycleStatus.removeClassName(this.options.statusPlayingClass);
-            this.cycleStatus.innerHTML = this.options.statusPausedText;
+            this.cycleStatus.update(this.options.statusPausedText);
         }
 
         if (this.scroller != null) this.scroller.stop();
@@ -132,17 +132,21 @@ Cycler.prototype = {
 
     doTransition: function() {
         // do transitions
-        this.currentChild.style.position = "absolute";
-        this.currentChild.style.top = "0";
-        this.currentChild.style.left = "0";
-        this.currentChild.style.width = "100%";
-        this.currentChild.style.zIndex = this.options.zIndex;
+        this.currentChild.setStyle({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            zIndex: this.options.zIndex
+        });
 
         this.currentChild.visualEffect('appear', { beforeFinish: this.revertArticle.bind(this) });
     },
 
     revertArticle: function() {
-        this.currentChild.style.position = "";
+        this.currentChild.setStyle({
+            position: ""
+        });
         this.oldChild.hide();
     }
 };
