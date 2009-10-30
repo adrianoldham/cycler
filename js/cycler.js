@@ -44,10 +44,10 @@ Cycler.prototype = {
 
         // only show first article at start up
         first = true;
-        this.elementClass = this.options.elementClass;
+        var elementClass = this.options.elementClass;
         this.articleElements.each(function(e) {
             Element.remove(e);
-            var wrappedArticle = new Element("div", { "class": this.elementClass });
+            var wrappedArticle = new Element("div", { "class": elementClass });
 
             wrappedArticle.appendChild(e);
             wrapper.appendChild(wrappedArticle);
