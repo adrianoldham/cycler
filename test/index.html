@@ -48,7 +48,7 @@
 			color: gray;
 			font-size: 0.9em;
 		}
-		#cyclerStatus
+		#cyclerStatus, .cycler-status
 		{
 		    position: absolute;
 		    bottom: 0;
@@ -114,8 +114,13 @@
         Make sure to change the selector used with the cycler to match your requirements.
         "div#container div.article" is the selector used for this demo.
         */
-	    var cycler = new Cycler("div.home div.article", { delay: 5, statusElement: "cyclerStatus", random: true });
-//	    cycler.startCycle();	
+	    var cycler = new Cycler("div.home div.article", {
+	        delay: 5,
+	        statusElement: "cyclerStatus",
+	        //statusElement: true,
+	        random: true
+	    });
+	    cycler.startCycle();	
 	</script>
 </body>
 </html>
