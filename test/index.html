@@ -25,7 +25,7 @@
 		
 		.article
 		{
-			background-color: #eee;
+			/*background-color: #eee;*/
 			position: relative;
 			min-height: 150px;
 		}
@@ -116,9 +116,11 @@
         */
 	    var cycler = new Cycler("div.home div.article", {
 	        delay: 5,
-	        statusElement: "cyclerStatus",
-	        //statusElement: true,
-	        random: true
+	        statusElement: "cyclerStatus",     // use defined element id
+	        //statusElement: true,             // inject status element
+	        random: true,
+	        animation: "crossfade",
+	        animationDuration: 0.35
 	    });
 	    cycler.startCycle();	
 	</script>

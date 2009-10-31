@@ -140,13 +140,29 @@ Cycler.prototype = {
             zIndex: this.options.zIndex
         });
 
-        this.currentChild.visualEffect('appear', { beforeFinish: this.revertArticle.bind(this) });
+        switch (this.options.animation) {
+            case "crossfade":
+                new Effect.Parallel([
+                    new Effect.Appear(this.currentChild, { sync: true }), 
+                    new Effect.Fade(this.oldChild, { sync: true, beforeFinish: this.revertArticle.bind(this) }) 
+                ], { 
+                    duration: this.options.animationDuration
+                });
+                break;
+
+            case false:
+                this.currentChild.show();
+                this.revertArticle();
+                break;
+
+            default:
+                this.currentChild.appear({ beforeFinish: this.revertArticle.bind(this) });
+                break;
+        }
     },
 
     revertArticle: function() {
-        this.currentChild.setStyle({
-            position: ""
-        });
+        this.currentChild.setStyle({ position: "" });
         this.oldChild.hide();
     }
 };
@@ -162,5 +178,7 @@ Cycler.DefaultOptions = {
     statusPlayingClass: "playing",
     statusPausedText: "Paused",
     statusPlayingText: "Playing",
-    statusElement: false
+    statusElement: false,                      // true, false or element id
+    animation: true,                           // true, false, crossfade
+    animationDuration: 0.5
 };
